@@ -12,36 +12,35 @@
         <jsp:include page="/WEB-INF/views/ind/header.jsp" /> <!-- 헤더 경로 수정 -->
         <h1>상품 등록</h1>
         <div id="formArea">
-            <form id="productReg" action="uploadProduct.jsp" method="post" enctype="multipart/form-data">
-                <label> 
-                    <span>상품이미지</span> 
-                    <input type="file" name="image">
-                </label> 
-                <br>
-                <label> 
-                    <span>상품명</span> 
-                    <input type="text" name="productName">
-                </label> 
-                <br>
-                <label> 
-                    <span>가격</span> 
-                    <input type="text" name="price">
+            <form id="productReg" action="/uploadFile" method="post" enctype="multipart/form-data"> <!-- 여기서 action 경로 수정 -->
+                <label>
+                    <span>상품이미지</span>
+                    <input type="file" name="image" required>
                 </label>
-                <br> 
-                <label> 
-                    <span>상품설명</span> 
-                    <textarea name="description"></textarea>
+                <br>
+                <label>
+                    <span>상품명</span>
+                    <input type="text" name="productName" required>
                 </label>
-                <br> 
-                <label> 
-                    <span>상품종류</span> 
-                    <select name="category">
+                <br>
+                <label>
+                    <span>가격</span>
+                    <input type="text" name="price" required>
+                </label>
+                <br>
+                <label>
+                    <span>상품설명</span>
+                    <textarea name="description" required></textarea>
+                </label>
+                <br>
+                <label>
+                    <span>상품종류</span>
+                    <select name="category" required>
                         <option value="whisky" selected>위스키</option>
                         <option value="wine">와인</option>
                         <option value="bodca">보드카</option>
                         <option value="traditional">전통주</option>
                     </select>
-    
                 </label>
                 <div class="btnArea">
                     <button type="submit" form="productReg" class="bobo">등록</button>
@@ -49,7 +48,7 @@
                 </div>
             </form>
         </div>
-        
+
         <div class="btnArea">
             <button type="button" class="bobo" onclick="location.href='/showcase/productList?productType=whisky'">위스키 목록</button>
             <button type="button" class="bobo" onclick="location.href='/showcase/productList?productType=wine'">와인 목록</button>

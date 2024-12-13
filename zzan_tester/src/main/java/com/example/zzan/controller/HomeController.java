@@ -167,7 +167,7 @@ public class HomeController {
         return "admin/adminPage"; // adminPage.jsp를 반환
     }
 
-    // 파일 업로드 처리 매핑
+ // 파일 업로드 처리 매핑
     @PostMapping("/uploadFile")
     public String handleFileUpload(@RequestParam("image") MultipartFile file,
                                    @RequestParam("productName") String productName,
@@ -180,7 +180,12 @@ public class HomeController {
             return "showcase/register";
         }
 
-        String fileStorage = "/path/to/images/"; // 파일 저장 경로
+        String fileStorage = "C:/path/to/images/"; // 실제 파일 저장 경로로 수정
+        File directory = new File(fileStorage);
+        if (!directory.exists()) {
+            directory.mkdirs(); // 경로가 존재하지 않으면 생성
+        }
+
         String upFileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
         File destFile = new File(fileStorage + upFileName);
 
@@ -194,7 +199,7 @@ public class HomeController {
 
             try {
                 conn = DBUtill.getConnection();
-                String sql = "INSERT INTO products (productName, price, description, imagePath, category) VALUES (?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO product (subject, price, content, stored_filename, category) VALUES (?, ?, ?, ?, ?)";
                 pstmt = conn.prepareStatement(sql);
                 pstmt.setString(1, productName);
                 pstmt.setString(2, price);
